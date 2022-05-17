@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const {model} = require("mongoose");
 const Schema = mongoose.Schema;
 
 const bookSchema = new Schema({
@@ -10,6 +9,14 @@ const bookSchema = new Schema({
     author: {
         type: String,
         required: true
+    },
+    available: {
+        type: Boolean,
+        required: true
+    },
+    image: {
+        type: String,
+        required: false
     }
 }, {timestamps: true});
 
