@@ -10,6 +10,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Copyright from "../components/Copyright";
+import { register } from "../../../api/global";
 
 const theme = createTheme();
 
@@ -17,10 +18,18 @@ export default function SignUp() {
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        console.log({
+        register({
             email: data.get('email'),
             password: data.get('password'),
-        });
+            firstName: data.get('firstName'),
+            lastName: data.get('lastName'),
+        }).then(() => {
+            alert('success')
+        })
+        .catch(() => {
+            alert('error')
+        })
+        console.log();
     };
 
     return (

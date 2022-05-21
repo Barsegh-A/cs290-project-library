@@ -1,5 +1,9 @@
-import axios from "axios";
+import axiosInstance from "../config/axiosInstance";
 
 export function login(payload) {
-    return axios.post(`${process.env.API_URL}/login`, payload)
+    return axiosInstance.post(`/signin`, payload)
+}
+
+export function register(payload) {
+    return axiosInstance.post(`/signup`, payload)
 }
