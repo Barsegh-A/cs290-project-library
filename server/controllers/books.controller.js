@@ -1,14 +1,12 @@
 const express = require("express");
-const {auth} = require("../middleware/auth");
+const {auth, authAdmin} = require("../middleware/auth");
 const booksService = require("../services/books.service");
 const asyncHandler = require('express-async-handler');
+const roles = require("../common/roles/roles");
 
 const router = new express.Router();
 
-router.post("/add", auth, asyncHandler(async (req, res) => {
-    if(req.user.role !=='admin'){
-        return res.status(401).send({message: "You don't have permission"});
-    }
+router.post("/add", authAdmin, asyncHandler(async (req, res) => {
     const book = req.body;
     const {newBook} = await booksService.add(book)
     res.status(201).send({book: newBook});

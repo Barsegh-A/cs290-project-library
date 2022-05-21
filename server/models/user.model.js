@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const validator = require("validator");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const roles = require("../common/roles/roles");
 
 const userSchema = new mongoose.Schema(
     {
@@ -44,7 +45,7 @@ const userSchema = new mongoose.Schema(
         role:{
             type: String,
             trim: true,
-            default: 'reader'
+            default: roles.reader
         }
     },
     {
