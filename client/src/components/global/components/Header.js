@@ -1,14 +1,30 @@
 import * as React from 'react';
-import { Link as LinkRouter } from 'react-router-dom'
+import Box from "@mui/material/Box";
 import PropTypes from 'prop-types';
 import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
+import {useNavigate} from "react-router-dom";
 
 function Header(props) {
-    const { sections, title } = props;
+    const { sections, title, setUser, user } = props;
+    const navigate = useNavigate()
+
+    const signOut = () => {
+        localStorage.removeItem('user')
+        localStorage.removeItem('access_token')
+        setUser({
+            token: '',
+            user: {}
+        })
+        navigate('/')
+    }
+
+    const manageBooks = () => {
+        navigate('/book/list')
+    }
 
     return (
         <React.Fragment>
@@ -27,11 +43,18 @@ function Header(props) {
                 <IconButton>
                     <></>
                 </IconButton>
-                <LinkRouter to="/">
-                    <Button variant="outlined" size="small">
-                        Sign in
-                    </Button>
-                </LinkRouter>
+                {user.role === 'admin' ?
+                    <Box mr={2}>
+                        <Button variant="outlined" size="small" onClick={manageBooks}>
+                            manage
+                        </Button>
+                    </Box> : null
+                }
+
+
+                <Button variant="outlined" size="small" onClick={signOut}>
+                    Sign out
+                </Button>
             </Toolbar>
             <Toolbar
                 component="nav"

@@ -3,7 +3,7 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import { Link } from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -15,15 +15,19 @@ import Copyright from "../components/Copyright";
 
 const theme = createTheme();
 
-function Login() {
+function Login({ setUser }) {
+    const navigate = useNavigate();
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         login({
             email: data.get('email'),
             password: data.get('password'),
-        }).then(() => {
-            alert('success')
+        }).then((response) => {
+            localStorage.setItem('access_token', response.data.token)
+            localStorage.setItem('user', JSON.stringify(response.data.user))
+            setUser(response.data)
+            navigate("/home");
         }).catch(() => {
             alert('error')
         })

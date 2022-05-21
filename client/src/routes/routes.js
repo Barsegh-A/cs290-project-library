@@ -1,6 +1,7 @@
-import Home from '../components/global/pages/Home'
+import Home from '../components/user/pages/Home'
 import Login from "../components/global/pages/Login";
 import Signup from "../components/global/pages/Signup";
+import BooksList from "../components/admin/pages/BooksList";
 
 const routes = [
     {
@@ -8,7 +9,7 @@ const routes = [
         route: '/home',
         component: <Home />,
         public: false,
-        permissions: ['user','admin']
+        permissions: ['reader','admin']
     },
     {
         id: 2,
@@ -26,52 +27,31 @@ const routes = [
     },
     {
         id: 4,
-        route: '/category/create',
-        component: <Signup />,
-        public: false,
-        permissions: ['admin']
-    },
-    {
-        id: 5,
-        route: '/category/list',
-        component: <Signup />,
-        public: false,
-        permissions: ['admin']
-    },
-    {
-        id: 6,
-        route: '/category/:id/edit',
-        component: <Signup />,
-        public: false,
-        permissions: ['admin']
-    },
-    {
-        id: 7,
         route: '/book/create',
         component: <Signup />,
         public: false,
         permissions: ['admin']
     },
     {
-        id: 8,
+        id: 5,
         route: '/book/list',
-        component: <Signup />,
+        component: <BooksList />,
         public: false,
         permissions: ['admin']
     },
     {
-        id: 9,
+        id: 6,
         route: '/book/:id/edit',
         component: <Signup />,
         public: false,
         permissions: ['admin']
     },
     {
-        id: 10,
+        id: 7,
         route: '/books',
         component: <Signup />,
         public: false,
-        permissions: ['user']
+        permissions: ['reader']
     },
 ]
 

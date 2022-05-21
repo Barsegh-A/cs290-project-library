@@ -9,9 +9,14 @@ const axiosInstance = axios.create(
             'Access-Control-Allow-Headers': 'Content-Type, Authorization',
             'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
             'Content-Type': 'application/json',
-            'Origin': process.env.REACT_APP_APP_URL
         }
     }
 )
+
+const token = localStorage.getItem('access_token')
+
+if (token) {
+    axiosInstance.defaults.headers['Authorization'] = `Bearer ${token}`
+}
 
 export default axiosInstance

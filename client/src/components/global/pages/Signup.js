@@ -3,7 +3,7 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -14,7 +14,10 @@ import { register } from "../../../api/global";
 
 const theme = createTheme();
 
-export default function SignUp() {
+export default function SignUp(props) {
+    const { setUser, user } = props
+    const navigate = useNavigate();
+
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
@@ -23,8 +26,11 @@ export default function SignUp() {
             password: data.get('password'),
             firstName: data.get('firstName'),
             lastName: data.get('lastName'),
-        }).then(() => {
-            alert('success')
+        }).then((response) => {
+            localStorage.setItem('access_token', response.data.token)
+            localStorage.setItem('user', JSON.stringify(response.data.user))
+            setUser(response.data)
+            navigate("/home");
         })
         .catch(() => {
             alert('error')
