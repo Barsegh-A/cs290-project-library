@@ -1,5 +1,6 @@
 const errorHandler = require('./common/middlewares/error-handler.middleware');
 const express = require('express');
+const cors = require('cors');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const userRouter = require('./controllers/users.controller')
@@ -7,6 +8,8 @@ const bookRouter = require('./controllers/books.controller')
 dotenv.config();
 
 const app = express();
+
+app.use(cors());
 
 app.use(express.json());
 
