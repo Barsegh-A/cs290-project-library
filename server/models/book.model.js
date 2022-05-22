@@ -14,12 +14,11 @@ const bookSchema = new Schema({
         type: Boolean,
         required: true
     },
-    category: [
-        {
+    category: {
             type: String,
             required: false
-        }
-    ],
+    },
+
     description: {
         type: String,
         required: true
