@@ -29,7 +29,7 @@ router.get('/', auth, asyncHandler(async (req, res) => {
     res.status(200).send(result);
 }))
 
-router.patch('update/:id/', authAdmin, asyncHandler(async (req, res) => {
+router.patch('/update/:id/', authAdmin, asyncHandler(async (req, res) => {
     const id = req.params['id'];
     const result = await booksService.updateBook(id, req.body);
     res.status(200).send(result);
