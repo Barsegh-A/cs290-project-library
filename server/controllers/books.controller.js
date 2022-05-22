@@ -12,6 +12,11 @@ router.post("/add", authAdmin, asyncHandler(async (req, res) => {
     res.status(201).send({book: newBook});
 }))
 
+router.delete('/remove/:id/', authAdmin, asyncHandler(async (req, res, next) => {
+    const id = req.params['id'];
+    const result = await booksService.removeBook(id);
+    res.status(201).send(result);
+}))
 
 router.get('/:id/', auth, asyncHandler(async (req, res, next) => {
     const id = req.params['id'];

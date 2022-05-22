@@ -17,6 +17,12 @@ module.exports = {
         return book;
     },
 
+    async removeBook(id) {
+        const book = await this.getBook(id);
+        book.remove();
+        return book;
+    },
+
     async getAllBooks() {
         const books = await Book.find({});
         return books;
