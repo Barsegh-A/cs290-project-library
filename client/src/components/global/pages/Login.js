@@ -12,6 +12,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import { login } from "../../../api/global";
 import Copyright from "../components/Copyright";
+import axiosInstance from "../../../config/axiosInstance";
 
 const theme = createTheme();
 
@@ -24,12 +25,15 @@ function Login({ setUser }) {
             email: data.get('email'),
             password: data.get('password'),
         }).then((response) => {
+            console.log('response.data', response.data.token);
             localStorage.setItem('access_token', response.data.token)
             localStorage.setItem('user', JSON.stringify(response.data.user))
+            axiosInstance.defaults.headers['Authorization'] = `Bearer ${response.data.token}`
             setUser(response.data)
-            navigate("/home");
         }).catch(() => {
             alert('error')
+        }).then(() => {
+            navigate("/home");
         })
     };
 

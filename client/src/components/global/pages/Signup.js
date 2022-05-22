@@ -11,6 +11,7 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Copyright from "../components/Copyright";
 import { register } from "../../../api/global";
+import axiosInstance from "../../../config/axiosInstance";
 
 const theme = createTheme();
 
@@ -29,13 +30,13 @@ export default function SignUp(props) {
         }).then((response) => {
             localStorage.setItem('access_token', response.data.token)
             localStorage.setItem('user', JSON.stringify(response.data.user))
+            axiosInstance.defaults.headers['Authorization'] = `Bearer ${response.data.token}`
             setUser(response.data)
             navigate("/home");
         })
         .catch(() => {
-            alert('error')
+            alert('Something went wrong')
         })
-        console.log();
     };
 
     return (
