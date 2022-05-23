@@ -101,9 +101,9 @@ function BooksList({  user, setUser }) {
                 setSelectedBook({})
                 setBooks(booksCopy)
             })
-            .catch(() => {
-                alert('Something went wrong')
-            })
+                .catch(() => {
+                    alert('Something went wrong')
+                })
         } else {
             updateBook(selectedBook, selectedBook._id).then((response) => {
                 const booksCopy = [...books]
@@ -249,11 +249,11 @@ function BooksList({  user, setUser }) {
                             <TableHead>
                                 <TableRow>
                                     <TableCell>Title</TableCell>
-                                    <TableCell align="right">Author</TableCell>
                                     <TableCell align="right">Category</TableCell>
                                     <TableCell align="right">Description</TableCell>
-                                    <TableCell align="right">Availability</TableCell>
-                                    <TableCell align="center">Actions</TableCell>
+                                    <TableCell align="right">Available</TableCell>
+                                    <TableCell align="right">Author</TableCell>
+                                    <TableCell align="right">Actions</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
@@ -265,15 +265,15 @@ function BooksList({  user, setUser }) {
                                         <TableCell component="th" scope="row">
                                             {row.title}
                                         </TableCell>
-                                        <TableCell align="right">
-                                            {row.author}
-                                        </TableCell>
                                         <TableCell align="right">{row.category}</TableCell>
                                         <TableCell align="right">{row.description}</TableCell>
                                         <TableCell align="right">
                                             <Box p="5px" display="inline" color="white" backgroundColor={row.available ? 'lightblue' : 'lightcoral'} borderRadius="10px">
                                                 {row.available ? 'available' : 'unavailable'}
                                             </Box>
+                                        </TableCell>
+                                        <TableCell align="right">
+                                            {row.author}
                                         </TableCell>
                                         <TableCell>
                                             <Button onClick={() => handleOpen(row)}>Delete</Button>
