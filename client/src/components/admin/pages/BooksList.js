@@ -227,7 +227,7 @@ function BooksList({  user, setUser }) {
                                             checked={selectedBook.available}
                                             onChange={inputChanges}
                                         />
-                                        is Checked
+                                        Available
                                     </Grid>
                                 </Grid>
 
@@ -248,12 +248,12 @@ function BooksList({  user, setUser }) {
                         <Table sx={{ minWidth: 650 }} aria-label="simple table">
                             <TableHead>
                                 <TableRow>
-                                    <TableCell>Name</TableCell>
+                                    <TableCell>Title</TableCell>
+                                    <TableCell align="right">Author</TableCell>
                                     <TableCell align="right">Category</TableCell>
                                     <TableCell align="right">Description</TableCell>
-                                    <TableCell align="right">Is Available</TableCell>
-                                    <TableCell align="right">Author</TableCell>
-                                    <TableCell align="right">Actions</TableCell>
+                                    <TableCell align="right">Availability</TableCell>
+                                    <TableCell align="center">Actions</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
@@ -265,15 +265,15 @@ function BooksList({  user, setUser }) {
                                         <TableCell component="th" scope="row">
                                             {row.title}
                                         </TableCell>
+                                        <TableCell align="right">
+                                            {row.author}
+                                        </TableCell>
                                         <TableCell align="right">{row.category}</TableCell>
                                         <TableCell align="right">{row.description}</TableCell>
                                         <TableCell align="right">
                                             <Box p="5px" display="inline" color="white" backgroundColor={row.available ? 'lightblue' : 'lightcoral'} borderRadius="10px">
                                                 {row.available ? 'available' : 'unavailable'}
                                             </Box>
-                                        </TableCell>
-                                        <TableCell align="right">
-                                            {row.author}
                                         </TableCell>
                                         <TableCell>
                                             <Button onClick={() => handleOpen(row)}>Delete</Button>
